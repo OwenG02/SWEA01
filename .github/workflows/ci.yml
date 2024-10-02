@@ -1,6 +1,5 @@
 name: CI Pipeline
 
-# Trigger the workflow on push or pull request events to the main branch
 on:
   push:
     branches:
@@ -14,18 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Latest version of checkout action
 
-      # Set up JDK 11
       - name: Set up JDK 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3  # Latest version of setup-java action
         with:
           java-version: '11'
           distribution: 'adopt'
 
-      # Build the project with Maven
       - name: Build with Maven
         run: mvn clean install
+
+      - name: Run tests
+        run: mvn test
+
 
